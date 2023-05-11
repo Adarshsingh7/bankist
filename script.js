@@ -7,7 +7,7 @@ const rupees = '₹';
 
 // Data
 const account1 = {
-  owner: 'Adarsh singh',
+  owner: 'Adarsh Singh',
   movements: [9549, 18989, 11672, -6662, -3081, 24337, 40810, -6158, 37393, -3602, 1964332, 34350, 41586, 28572, 19987, 48392, 35474, 37722, -1169, 43300, -6911],
   interestRate: 1.2, // %
   pin: 1111,
@@ -22,7 +22,7 @@ const account2 = {
 };
 
 const account3 = {
-  owner: 'saumya',
+  owner: 'Saumya',
   movements: [39087, 3695, -1561, -7460, 23448, 48142, 28502, 33974, 3590, 12450, 21464, 36444, -3567, 49826, 25484, 45375, 9669, -1832, -697, 10894],
   interestRate: 0.7,
   balance: 100000,
@@ -30,7 +30,7 @@ const account3 = {
 };
 
 const account4 = {
-  owner: 'shivani',
+  owner: 'Shivani',
   movements: [-1704, 45144, -2305, -2756, 37747, 6368, 14729, 49740, 16077, -4521, 11629, 15266, 33596, 41763, 10760, -9506, 28391, 21466, 22287, -7715],
   interestRate: 1,
   balance: 100000,
@@ -38,7 +38,7 @@ const account4 = {
 };
 
 const account5 = {
-  owner: 'sandeep kumar maurya',
+  owner: 'Sandeep Kumar Maurya',
   movements: [8314, 24632, 28845, 6901, 36158, -1060, 11008, 38425, -5691, 48769, 1226, 35803, 10471, 38516, 46339, -2703, 14034, 1952, 21223, 43917],
   interestRate: 1,
   balance: 100000,
@@ -46,7 +46,7 @@ const account5 = {
 };
 
 const account6 = {
-  owner: 'shobhit yadav',
+  owner: 'Shobhit Yadav',
   movements: [-6385, 29391, 49150, 26059, -934, 16216, 33277, 2239, 49656, 12301, 17312, 12424, 26451, 14846, 4324, 3209, 12613, 34548, 19402, 8741],
   interestRate: 1,
   balance: 100000,
@@ -54,7 +54,7 @@ const account6 = {
 };
 
 const account7 = {
-  owner: 'ashutosh shukla',
+  owner: 'Ashutosh Shukla',
   movements: [-1195, 11188, 24992, 36048, 15625, -8172, 31289, 40320, 33444, 33103, 8689, 9907, 43935, 39276, 49500, 22743, 29182, 35363, 21650, -1858],
   interestRate: 1,
   balance: 100000,
@@ -62,7 +62,7 @@ const account7 = {
 };
 
 const account8 = {
-  owner: 'mayank saini',
+  owner: 'Mayank Saini',
   movements: [34039, 39341, 5942, -1683, 26722, 19957, -4507, -9193, 17175, 36849, 18678, 7379, 47385, 16419, 15240, 10379, -8097, 24530, 13296, 28107],
   interestRate: 1,
   balance: 100000,
@@ -124,7 +124,7 @@ const displayMovements = function (acc) {
   acc.movements.forEach((amt, i) => {
     containerMovements.insertAdjacentHTML('afterbegin',
       ` <div class="movements__row" >
-          <div class="movements__type movements__type--${amt > 0 ? 'deposit' : 'withdrawal'}">${i + 1} deposit</div>
+          <div class="movements__type movements__type--${amt > 0 ? 'deposit' : 'withdrawal'}">${i + 1} ${amt > 0 ? 'deposit' : 'withdrawal'}</div>
           <div class="movements__date">${15 - i > 0 ? (`${17 - i} days ago`) : 'today'}</div>
           <div class="movements__value">${formatMoney(amt)}  </div>
         </div>`
