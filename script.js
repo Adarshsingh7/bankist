@@ -110,9 +110,13 @@ accounts.forEach(account => {
   account.username = account.owner.split(' ')[0].toLocaleLowerCase();
 });
 
+const formatMoney = (amt) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amt);
+
+const formatDate = (date) => new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'long', year: 'numeric', weekday: 'long' }).format(date);
+
 const displayCalcBalance = function (acc) {
   const totalBalance = acc.movements.reduce((acc, el) => acc + el);
-  labelBalance.innerHTML = `${rupees}${totalBalance}`;
+  labelBalance.innerHTML = `${formatMoney(totalBalance)}`;
 };
 
 const displayMovements = function (acc) {
@@ -122,24 +126,28 @@ const displayMovements = function (acc) {
       ` <div class="movements__row" >
           <div class="movements__type movements__type--${amt > 0 ? 'deposit' : 'withdrawal'}">${i + 1} deposit</div>
           <div class="movements__date">${15 - i > 0 ? (`${17 - i} days ago`) : 'today'}</div>
-          <div class="movements__value">${rupees}${amt}  </div>
+          <div class="movements__value">${formatMoney(amt)}  </div>
         </div>`
     );
   });
 };
 
 const displaySummary = function (acc) {
-  labelSumIn.innerHTML = `${rupees}${acc.movements
+  const sumIn = `${acc.movements
     .filter(el => el > 0)
     .reduce((acc, el) => acc + el)}`;
-  labelSumOut.innerHTML = `${rupees}${acc.movements
+  const sumOut = `${acc.movements
     .filter(el => el < 0)
     .reduce((acc, el) => acc + el) * -1}`;
-  labelSumInterest.innerHTML = `${rupees}${acc.movements
+  const sumIntrest = `${acc.movements
     .filter(el => el > 0)
     .map(el => el * activeAccount.interestRate / 100)
     .filter(el => el > 1)
     .reduce((acc, el) => acc + el)}`;
+
+  labelSumOut.textContent = formatMoney(sumOut);
+  labelSumIn.textContent = formatMoney(sumIn);
+  labelSumInterest.textContent = formatMoney(sumIntrest);
 };
 
 const updateUI = function (acc) {
@@ -153,13 +161,16 @@ btnLogin.addEventListener('click', function (e) {
 
   const inputUserName = inputLoginUsername.value;
   const inputPin = +inputLoginPin.value;
+  inputLoginUsername.value = '';
+  inputLoginPin.value = '';
   inputLoginPin.blur();
 
   // checking credentials and display ui
   activeAccount = accounts.filter(account => account.username === inputUserName)[0];
   if (activeAccount && activeAccount.pin === inputPin) {
+    labelDate.textContent = formatDate(new Date());
     containerApp.style.opacity = '1';
-    labelWelcome.innerHTML = `Welcome ${activeAccount.owner}`;
+    labelWelcome.innerHTML = `Welcome ${activeAccount.owner.split(' ')[0]}`;
     updateUI(activeAccount);
   }
 });
@@ -206,5 +217,9 @@ btnClose.addEventListener('click', function (e) {
     containerApp.style.opacity = 0;
   }
   inputCloseUsername.value = inputClosePin.value = '';
-})
+});
 
+// fake login for the testing purpose
+containerApp.style.opacity = 1;
+activeAccount = account1;
+updateUI(account1);
