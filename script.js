@@ -218,8 +218,3 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
 });
-
-// fake login for the testing purpose
-containerApp.style.opacity = 1;
-activeAccount = account1;
-updateUI(account1);
